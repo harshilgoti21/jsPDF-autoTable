@@ -1,0 +1,103 @@
+//@import "style1.scss";
+@import "colors";
+// ---variable---
+$primary-color: #ca1313;
+$height600: 600px;
+$relative: relative;
+$absolute: absolute;
+$top10: 10px;
+$top20: 20px;
+$left0: 0;
+$right0: 0;
+$bottom0: 0;
+$left50pr: 50%;
+$top50pr: 50%;
+
+// ---Extend---
+%position-shared {
+  position: $absolute;
+}
+//---mixing---
+
+@mixin transform($property, $circle) {
+  transform: $property;
+  //@debug "divider offset: #{$circle}";
+  @warn "Unknown prefix#{$circle}.";
+  @if $circle {
+    background-color: yellowgreen;
+  } @else {
+    background-color: green;
+  }
+}
+
+//--how to apply---
+
+.perent {
+  color: $primary-color;
+  height: $height600;
+  position: $relative;
+}
+
+.one {
+  @extend %position-shared;
+  @include transform(rotate(0deg), $circle: false);
+  left: $left0;
+  top: $top20;
+
+  &:hover {
+    font-weight: bold;
+  }
+}
+.two {
+  @extend %position-shared;
+  @include transform(rotate(270deg), $circle: false);
+  right: $right0;
+  top: $top20;
+}
+.three {
+  @extend %position-shared;
+  @include transform(rotate(90deg), $circle: false);
+  left: $left0;
+  bottom: $bottom0;
+}
+.four {
+  @extend %position-shared;
+  @include transform(rotate(60deg), $circle: false);
+  right: $right0;
+  bottom: $bottom0;
+}
+
+.five {
+  @extend %position-shared;
+  @include transform(rotate(30deg), $circle: true);
+  left: $left50pr;
+  top: $top50pr;
+
+  &:hover {
+    font-weight: bold;
+  }
+
+  // :not(&) {
+  //   opacity: 0.8;
+  // }
+}
+
+.outer {
+  position: $relative;
+  top: 10px;
+  background-color: green;
+  height: 200px;
+  z-index: 100;
+
+  .inner {
+    color: blue;
+    position: $absolute;
+    left: 50%;
+    top: 50%;
+    background-color: yellow;
+    height: 50px;
+    width: 100px;
+    text-align: center;
+    opacity: 0.6;
+  }
+}

@@ -1,0 +1,10 @@
+@use "button";
+
+.six {
+  background-color: button.$primary-color;
+  color: blue;
+}
+
+.five {
+  font-size: xx-large;
+}
