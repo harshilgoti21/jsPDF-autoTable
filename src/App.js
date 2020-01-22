@@ -175,46 +175,75 @@ function App() {
   // };
 
   function generatePdf() {
-    var doc = new jsPDF();
+    var doc = new jsPDF("p", "mm", "a4");
 
     //doc.text("With content", 14, 22);
+    //var pageNumber = doc.internal.getNumberOfPages();
+    // console.log("pageNumber", pageNumber);
+    //doc.setPage(pageNumber);
     doc.setFontSize(11);
     doc.setTextColor(100);
-    console.log("doc", doc);
     var key = Object.keys(dummyData[0]);
     var value = dummyData.map(Element => Object.values(Element));
 
+    doc.setFont("custom");
+    doc.setDrawColor(0);
+    doc.setFillColor(241, 191, 176);
+    doc.roundedRect(80, 50, 50, 10, 3, 3, "FD");
+    doc.setTextColor(255, 0, 0);
+    doc.setFontSize(18);
+    doc.setFontType("normal");
+    doc.text("hello", 90, 55);
+
+    doc.setFont("default");
+    doc.setTextColor(100);
+    doc.setFontSize(11);
     doc.text("This is the default font.", 20, 20);
 
     doc.setFont("courier");
     doc.setFontStyle("normal");
+    doc.setTextColor(100);
+    doc.setFontSize(11);
     doc.text("This is courier normal.", 20, 30);
 
     doc.setFont("times");
     doc.setFontStyle("italic");
+    doc.setFontSize(11);
     doc.text("This is times italic.", 20, 40);
+    doc.text("This is times italic.", 20, 45);
+    doc.setTextColor(100);
 
     doc.setDrawColor(0);
-    doc.setFillColor(105, 0, 0);
+    doc.text("harshil", 140, 30);
+    doc.setFillColor(241, 191, 176);
     doc.roundedRect(140, 20, 50, 10, 3, 3, "FD");
+    doc.setTextColor(100);
 
     doc.line(20, 20, 180, 20);
 
     doc.setFont("time");
     doc.setFontStyle("bolditalic");
     doc.text("This is courier bolditalic.", 60, 40);
+    doc.setTextColor(100);
+    doc.setFontSize(11);
 
     doc.setFont("helvetica");
     doc.setFontStyle("bold");
     doc.text("This is helvetica bold.", 20, 50);
+    doc.setTextColor(100);
+    doc.setFontSize(11);
 
     doc.setFont("courier");
     doc.setFontStyle("bolditalic");
     doc.text("This is courier bolditalic.", 20, 60);
+    doc.setTextColor(100);
+    doc.setFontSize(11);
 
     doc.setFont("times");
     doc.setFontStyle("normal");
     doc.text("This is centred text.", 105, 80, null, null, "center");
+    doc.setTextColor(100);
+    doc.setFontSize(11);
     doc.text(
       "And a little bit more underneath it.",
       105,
@@ -226,9 +255,10 @@ function App() {
     doc.text("This is right aligned text", 200, 100, null, null, "right");
     doc.text("And some more", 200, 110, null, null, "right");
     doc.text("Back to left", 20, 120);
-
     doc.text("10 degrees rotated", 20, 140, null, 10);
     doc.text("-10 degrees rotated", 20, 160, null, -10);
+
+    let pageNumber = doc.internal.getNumberOfPages();
 
     doc.autoTable({
       head: [key],
@@ -242,6 +272,9 @@ function App() {
       tableWidth: "auto",
       theme: "striped"
     });
+
+    doc.setPage(pageNumber);
+
     doc.save(`${pdfName}.pdf`);
   }
 
