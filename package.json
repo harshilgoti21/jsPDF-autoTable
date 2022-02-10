@@ -9,7 +9,7 @@
     "git": "^0.1.5",
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.2.11",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
